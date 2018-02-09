@@ -24,21 +24,27 @@ class Definition extends Component {
 
         return (
             <View style={styles.container}>
-                <Text h1>{id} <Text h4>[{phonetic}]</Text></Text>
-
                 <Icon
                     type='font-awesome'
-                    onPress={()=>{this.props.addWord(this.props.definition)}}
-                    name='heart' />
-                <Icon
-                    type='font-awesome'
+                    iconStyle={{alignSelf: 'flex-end'}}
                     onPress={this.props.closeModal}
                     name='close' />
-                <Text >{categories}</Text>
+                <View style={styles.header}>
+                    <Text h1>{id}</Text>
+                    <Text style={styles.category} h5>[{phonetic}]</Text>
+                    <Icon
+                        type='font-awesome'
+                        iconStyle={{alignItems: 'flex-end'}}
+                        onPress={()=>{this.props.addWord(this.props.definition)}}
+                        color= '#E91E63'
+                        name='heart' />
+                </View>
+
+                <Text style={styles.category}>{categories}</Text>
                 {/* {this.renderSenses(senses[0])} */}
                 {/* {this.renderSenses(senses.subsenses)} */}
-                <Text h5>{senses[0].definitions[0]} :</Text>
-                <Text>{senses[0].examples[0].text}</Text>
+                <Text h5>- {senses[0].definitions[0]} :</Text>
+                <Text>E.g. {senses[0].examples[0].text}</Text>
             </View>
         )
     }
@@ -59,6 +65,15 @@ const styles = StyleSheet.create({
         height: 500,
         backgroundColor: 'white'
     },
+    header: {
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+    },
+    category: {
+        fontStyle: 'italic',
+    },
+
 
 })
 

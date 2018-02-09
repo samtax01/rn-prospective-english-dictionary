@@ -40,7 +40,8 @@ const RootStack = StackNavigator(
     }, 
   },
   {
-    initialRouteName: 'Splash',
+    // initialRouteName: 'Splash',
+    initialRouteName: 'Notebook',
     headerMode: 'modal'
   }
 );
