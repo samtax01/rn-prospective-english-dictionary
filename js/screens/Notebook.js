@@ -5,7 +5,7 @@ import { fetchWords } from '../api/firebase';
 import WordList from '../components/WordList';
 
 class Notebook extends Component {
-    state = { words: [] }
+    state = { words: null }
     async componentDidMount() {
         const words = await fetchWords()
         this.setState({
@@ -18,9 +18,7 @@ class Notebook extends Component {
                 <ImageBackground style={styles.background} source={require('../../res/home2.jpg')}>  
                     {/* <Text>Notebook Page</Text> */}
                     <ScrollView>
-                        { this.state.words ? <Text>no</Text> :
                         <WordList words={this.state.words}/>
-                        }
                         </ScrollView>
                 </ImageBackground>
 

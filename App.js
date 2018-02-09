@@ -9,7 +9,6 @@ import Notebook from './js/screens/Notebook';
 import Flashcard from './js/screens/Flashcard';
 import User from './js/screens/User';
 
-//test
 export default class App extends React.Component {
   render() {
     return (

@@ -23,7 +23,8 @@ export const addWord = async (definition) => {
   }
 
 export const fetchWords = async () => {
-  let words = await firebase.database().ref('notebook/').once('value');
+  let res = await firebase.database().ref('notebook/').once('value');
+  const words = Object.values(res.val());
     return words;
 } 
 
