@@ -45,20 +45,3 @@ const RootStack = StackNavigator(
   }
 );
 
-// const Tabs = TabNavigator({
-//   Home: {
-//     screen: Home,
-//     navigationOptions: {
-//       tabBarLabel: 'Home',
-//       tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />,
-//     },
-//   },
-//   Favorite: {
-//     screen: Favorite,
-//     navigationOptions: {
-//       tabBarLabel: 'Favorite',
-//       tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />,
-//     },
-//   },  
-// });
-

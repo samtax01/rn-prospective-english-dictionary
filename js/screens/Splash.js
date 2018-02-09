@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity , StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, StatusBar, StyleSheet, ImageBackground } from 'react-native';
+
 class Splash extends Component {
     state = {  }
     render() {
         return (
             <View style={styles.container}>
                 <ImageBackground style={styles.background} source={require('../../res/splash.jpg')}>  
-                    
+                    <StatusBar
+                        backgroundColor="transparent"
+                        barStyle="light-content"
+                    />
                     <Text style={styles.brand}>
                             Prospective English
                     </Text>

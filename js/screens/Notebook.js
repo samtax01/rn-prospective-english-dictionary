@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, ImageBackground } from 'react-native';
 import { Button } from 'react-native-elements';
 import { fetchWords } from '../api/firebase';
 import WordList from '../components/WordList';
@@ -16,9 +16,12 @@ class Notebook extends Component {
         return (
             <View style={styles.container}>
                 <ImageBackground style={styles.background} source={require('../../res/home2.jpg')}>  
-                    {/* <Text>Notebook Page</Text> */}
-                        <WordList words={this.state.words}/>
-                </ImageBackground>
+                    <StatusBar
+                    backgroundColor="transparent"
+                    barStyle="light-content"
+                    />
+                    <WordList words={this.state.words}/>
+            </ImageBackground>
 
             </View>            
         );
@@ -28,7 +31,6 @@ class Notebook extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 20,
     },
     background: {
         width: '100%',

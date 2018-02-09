@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity, ImageBackground } from 'react-native';
 import { Button } from 'react-native-elements';
 import { searchWord } from '../api/oxford';
 import { addWord } from '../api/firebase';
@@ -19,14 +19,20 @@ class Home extends Component {
     render() {
         return (
             <View style={styles.container}>
+
                 <ImageBackground style={styles.background} source={require('../../res/home2.jpg')}>  
-            
-                <SearchBox search={this.onSearchWord}/>
-                {/* <Button onPress={() => this.props.navigation.navigate('Notebook')}>Notebook</Button> */}
-                <View style={styles.modalContainer}>
-                    <Definition definition={this.state.definition} addWord={addWord}/>
-                </View> 
-                { this.state.definition ? null : <CardList navigation={this.props.navigation}/>}
+                    <StatusBar
+                        backgroundColor="transparent"
+                        barStyle="light-content"
+                    />
+                    <View style={styles.innerContainer}>
+                        <SearchBox search={this.onSearchWord}/>
+                        <View style={styles.modalContainer}>
+                            <Definition definition={this.state.definition} addWord={addWord}/>
+                        </View> 
+                        { this.state.definition ? null : <CardList navigation={this.props.navigation}/>}    
+                    </View>
+
                 </ImageBackground>
                 
             </View>
@@ -38,9 +44,10 @@ export default Home;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 20,
         flex: 1,
-        backgroundColor: '#fff',
+    },
+    innerContainer: {
+        marginTop: 20,
     },
     background: {
         width: '100%',
