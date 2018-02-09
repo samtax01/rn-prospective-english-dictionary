@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
 
 class Definition extends Component {
@@ -23,16 +23,21 @@ class Definition extends Component {
         senses = entry.entries[0].senses;
 
         return (
-            <View>
+            <View style={styles.container}>
                 <Text h1>{id} <Text h4>[{phonetic}]</Text></Text>
+
                 <Icon
                     type='font-awesome'
                     onPress={()=>{this.props.addWord(this.props.definition)}}
                     name='heart' />
+                <Icon
+                    type='font-awesome'
+                    onPress={this.props.closeModal}
+                    name='close' />
                 <Text >{categories}</Text>
                 {/* {this.renderSenses(senses[0])} */}
                 {/* {this.renderSenses(senses.subsenses)} */}
-                <Text h4>{senses[0].definitions[0]} :</Text>
+                <Text h5>{senses[0].definitions[0]} :</Text>
                 <Text>{senses[0].examples[0].text}</Text>
             </View>
         )
@@ -48,8 +53,13 @@ class Definition extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        margin: 20
-    }
+        borderRadius: 5,
+        padding: 20,
+        width: 300,
+        height: 500,
+        backgroundColor: 'white'
+    },
+
 })
 
 export default Definition;

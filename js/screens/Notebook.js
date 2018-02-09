@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ImageBackground, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import { Button } from 'react-native-elements';
 import { fetchWords } from '../api/firebase';
 import WordList from '../components/WordList';
@@ -17,9 +17,7 @@ class Notebook extends Component {
             <View style={styles.container}>
                 <ImageBackground style={styles.background} source={require('../../res/home2.jpg')}>  
                     {/* <Text>Notebook Page</Text> */}
-                    <ScrollView>
                         <WordList words={this.state.words}/>
-                        </ScrollView>
                 </ImageBackground>
 
             </View>            

@@ -23,9 +23,9 @@ class Home extends Component {
             
                 <SearchBox search={this.onSearchWord}/>
                 {/* <Button onPress={() => this.props.navigation.navigate('Notebook')}>Notebook</Button> */}
-                
-                <Definition definition={this.state.definition} addWord={addWord}/>
-                
+                <View style={styles.modalContainer}>
+                    <Definition definition={this.state.definition} addWord={addWord}/>
+                </View> 
                 { this.state.definition ? null : <CardList navigation={this.props.navigation}/>}
                 </ImageBackground>
                 
@@ -45,7 +45,10 @@ const styles = StyleSheet.create({
     background: {
         width: '100%',
         height: '100%',
-        // justifyContent: 'center',
-        // alignItems: 'center',
+    },
+    modalContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+
     },
 })
