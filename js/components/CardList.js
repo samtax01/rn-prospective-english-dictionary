@@ -22,10 +22,10 @@ class CardList extends Component {
             {
               screens.map((u, i) => {
                 return (
-                  <TouchableOpacity onPress={() => {this.props.navigation.navigate(u.name)}}>
+                  <TouchableOpacity key={u.name} onPress={() => {this.props.navigation.navigate(u.name)}}>
                   <ListItem
                     containerStyle={{height: 150, marginBottom: 50, borderRadius: 5, backgroundColor: 'white'}} 
-                    key={i}
+                    
                     roundAvatar
                     title={u.name}
                     avatar={{uri:u.avatar}}

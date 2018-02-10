@@ -1,29 +1,55 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button, ScrollView } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
 
 class Definition extends Component {
     state = {  }
-    // renderSenses = (sense) => {
-    //     return senses.map(sense => {
-    //         return (
-    //             <View>
-    //                 <Text>{sense.definitions[0]}</Text>
-    //                 <Text>{sense.examples[0].text}</Text>
-    //             </View>
-    //         )
-    //     })
-    // }
+    componentDidCatch(error, info) {
+        // Display fallback UI
+        // this.setState({ hasError: true });
+        // You can also log the error to an error reporting service
+        // logErrorToMyService(error, info);
+      }
+
+    renderSenses = (senses) => {
+        return senses.map(sense => {
+            try {
+                definition = sense.definitions[0]
+                example = sense.examples[0].text
+              } catch (error) {
+              }
+            return (
+                <View>
+                    <Text h5><Text style={styles.category}>Def. </Text>- {definition}</Text>
+                    <Text><Text style={styles.category}>E.g. </Text>{example}</Text>
+                </View>
+            )
+        })
+    }
+    renderEntries = (entries) => {
+        //map lexicalEntries-all entries, render etymology, senses, pronunciation
+        return entries.map(entry => {
+            categories = entry.lexicalCategory;
+            pronunciation = entry.pronunciations[0].audioFile;
+            phonetic = entry.pronunciations[0].phoneticSpelling;
+            senses = entry.entries[0].senses;
+
+            return (
+                <View style={styles.definition}>
+                    <Text style={styles.category}>{categories} <Text style={styles.phonetic}>[{phonetic}]</Text></Text>
+                    {this.renderSenses(senses)} 
+                    {/* {this.renderSenses(senses.subsenses)}  */}
+                </View>
+            )
+        })
+    }
+
     renderDefinition = () => {
         id = this.props.definition.id;
-        entry = this.props.definition.lexicalEntries[0]; //loop through
-        categories = entry.lexicalCategory;
-        pronunciation = entry.pronunciations[0].audioFile;
-        phonetic = entry.pronunciations[0].phoneticSpelling;
-        senses = entry.entries[0].senses;
+        entries = this.props.definition.lexicalEntries; //loop through
 
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.innerContainer}>
                 <Icon
                     type='font-awesome'
                     iconStyle={{alignSelf: 'flex-end'}}
@@ -31,26 +57,20 @@ class Definition extends Component {
                     name='close' />
                 <View style={styles.header}>
                     <Text h1>{id}</Text>
-                    <Text style={styles.category} h5>[{phonetic}]</Text>
                     <Icon
                         type='font-awesome'
-                        iconStyle={{alignItems: 'flex-end'}}
+                        iconStyle={{}}
                         onPress={()=>{this.props.addWord(this.props.definition)}}
                         color= '#E91E63'
                         name='heart' />
                 </View>
-
-                <Text style={styles.category}>{categories}</Text>
-                {/* {this.renderSenses(senses[0])} */}
-                {/* {this.renderSenses(senses.subsenses)} */}
-                <Text h5>- {senses[0].definitions[0]} :</Text>
-                <Text>E.g. {senses[0].examples[0].text}</Text>
-            </View>
+                {this.renderEntries(entries)}
+            </ScrollView>
         )
     }
     render() {
         return (
-        <View>
+        <View style={styles.container}>
             { this.props.definition ? this.renderDefinition() : null}
         </View>
         );
@@ -60,20 +80,31 @@ class Definition extends Component {
 const styles = StyleSheet.create({
     container: {
         borderRadius: 5,
-        padding: 20,
         width: 300,
         height: 500,
         backgroundColor: 'white'
     },
+    innerContainer: {
+        padding: 20,
+        paddingBottom: 80
+    },
     header: {
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    phonetic: {
+        fontStyle: 'italic',
+        fontSize: 18,
+        marginRight: 80,
     },
     category: {
         fontStyle: 'italic',
+        color: 'grey'
     },
-
+    definition: {
+        marginBottom: 20
+    }
 
 })
 
