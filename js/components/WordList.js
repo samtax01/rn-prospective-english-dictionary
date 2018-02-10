@@ -33,7 +33,7 @@ class WordList extends Component {
              <View style={styles.container}>
                 <ScrollView>
                     <Animated.View style={{opacity: opacity}}>
-                        <Card containerStyle={{borderRadius: 5, borderColor: 'transparent', backgroundColor: 'transparent', }} >
+                        <Card containerStyle={{borderRadius: 5, borderColor: 'transparent', backgroundColor: 'transparent', marginTop: -15}} >
                           {this.props.words? this.renderWords() : null}
                         </Card>
                     </Animated.View>
@@ -46,7 +46,8 @@ class WordList extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        paddingTop: 15
     },
 
   })

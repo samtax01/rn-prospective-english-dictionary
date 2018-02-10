@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
     container: {
         borderRadius: 5,
         width: 320,
-        height: 550,
+        height: 560,
+        marginTop: 5,
         backgroundColor: 'white',
     },
     innerContainer: {

@@ -11,14 +11,14 @@ import Definition from '../components/Definition';
 import Navigator from '../components/Navigator';
 
 class Notebook extends Component {
-    state = { word: '', words: this.props.navigation.state.params.words, visible: false, definition: '' }
+    state = { word: '', words: this.props.navigation.state.params.words, visible: false, definition: '', saved: true }
 
 
     closeModal = () => {
         this.setState({visible:false});
       }
     showDef = (definition) => {
-        this.setState({definition, visible:true})
+        this.setState({definition, visible:true, saved: true})
     }
     onSearchWord = async (word) => {
         const data = await searchWord(word)
@@ -47,7 +47,7 @@ class Notebook extends Component {
                     </View>
                     {this.state.visible ? 
                         <View style={styles.modalContainer}>
-                            <Definition definition={this.state.definition} addWord={addWord} closeModal={this.closeModal} saved={true}/>
+                            <Definition definition={this.state.definition} addWord={addWord} closeModal={this.closeModal} saved={this.state.saved}/>
                         </View> : null
                     }
             </ImageBackground>
@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
         flex: 5
     },
     tabContainer: {
-        flex: 1
+        flex: 1,
+        paddingBottom: 15
     }
 })
 export default Notebook;
