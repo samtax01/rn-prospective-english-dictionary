@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet,StatusBar, ImageBackground } from 'react-native';
-import { Button } from 'react-native-elements';
-import { fetchWords } from '../api/firebase';
+import { Button, Icon } from 'react-native-elements';
+// import { fetchWords } from '../api/firebase';
 import { searchWord } from '../api/oxford';
 import { addWord } from '../api/firebase';
 
 import SearchBox from '../components/SearchBox';
 import WordList from '../components/WordList';
 import Definition from '../components/Definition';
+import Navigator from '../components/Navigator';
 
 class Notebook extends Component {
-    state = { words: '', visible: false, definition: '' }
+    state = { word: '', words: this.props.navigation.state.params.words, visible: false, definition: '' }
 
-    async componentDidMount() {
-        const words = await fetchWords()
-        this.setState({
-            words: words
-        })
-  
-    }
+
     closeModal = () => {
         this.setState({visible:false});
       }
@@ -43,7 +38,13 @@ class Notebook extends Component {
                     <View style={styles.innerContainer}>
                         <SearchBox search={this.onSearchWord}/>
                     </View>
-                    <WordList words={this.state.words} showDef={this.showDef} />
+                    <View style={styles.listContainer}>
+                        <WordList words={this.state.words} showDef={this.showDef} />
+                    </View>
+
+                    <View style={styles.tabContainer}>
+                        <Navigator navigation={this.props.navigation} current='Notebook'/>
+                    </View>
                     {this.state.visible ? 
                         <View style={styles.modalContainer}>
                             <Definition definition={this.state.definition} addWord={addWord} closeModal={this.closeModal} saved={true}/>
@@ -68,10 +69,24 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     modalContainer: {
+        position: 'absolute',
         width: '100%',
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
+        paddingTop: 50
     },
+    title: {
+        textAlign: 'center',
+        backgroundColor: 'transparent',
+        fontSize: 28,
+        color: 'white'
+    },
+    listContainer: {
+        flex: 5
+    },
+    tabContainer: {
+        flex: 1
+    }
 })
 export default Notebook;

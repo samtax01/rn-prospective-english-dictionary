@@ -3,13 +3,22 @@ import { StyleSheet, Text, View, StatusBar, TouchableOpacity, ImageBackground } 
 import { Button } from 'react-native-elements';
 import { searchWord } from '../api/oxford';
 import { addWord } from '../api/firebase';
+import { fetchWords } from '../api/firebase';
 
 import SearchBox from '../components/SearchBox';
 import Definition from '../components/Definition';
 import CardList from '../components/CardList';
 
 class Home extends Component {
-    state = { word: '', definition: '', saved: false }
+    state = { word: '', words: '', definition: '', saved: false }
+
+    async componentDidMount() {
+        const words = await fetchWords()
+        this.setState({
+            words: words
+        })
+    }
+
     onSearchWord = async (word) => {
         const data = await searchWord(word)
         const definition = data[0]
@@ -32,7 +41,7 @@ class Home extends Component {
                             <View style={styles.modalContainer}>
                                 <Definition definition={this.state.definition} addWord={addWord} saved={this.state.saved}/>
                             </View> : null}
-                        { this.state.definition ? null : <CardList navigation={this.props.navigation}/>}    
+                        { this.state.definition ? null : <CardList navigation={this.props.navigation} words={this.state.words}/>}    
                     </View>
 
                 </ImageBackground>

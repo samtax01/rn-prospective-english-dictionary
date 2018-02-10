@@ -15,14 +15,14 @@ const screens = [
    
 class CardList extends Component {
     state = {  }
-    
+
     render() {
         return (
             <Card containerStyle={{borderRadius: 5, borderColor: 'transparent', backgroundColor: 'transparent', }} >
             {
               screens.map((u, i) => {
                 return (
-                  <TouchableOpacity key={u.name} onPress={() => {this.props.navigation.navigate(u.name)}}>
+                  <TouchableOpacity key={u.name} onPress={() => {this.props.navigation.navigate(u.name, {words: this.props.words})}}>
                   <ListItem
                     containerStyle={{height: 150, marginBottom: 50, borderRadius: 5, backgroundColor: 'white'}} 
                     
