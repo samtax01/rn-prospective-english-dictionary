@@ -1,6 +1,6 @@
 {
-  "name": "rn-dictionary-now",
-  "version": "0.1.0",
+  "name": "rn-prospective-english-dictionary",
+  "version": "1.0.0",
   "private": true,
   "devDependencies": {
     "jest-expo": "23.0.0",
