@@ -27,9 +27,11 @@ class Home extends Component {
                     />
                     <View style={styles.innerContainer}>
                         <SearchBox search={this.onSearchWord}/>
-                        <View style={styles.modalContainer}>
-                            <Definition definition={this.state.definition} addWord={addWord}/>
-                        </View> 
+
+                        { this.state.definition ? 
+                            <View style={styles.modalContainer}>
+                                <Definition definition={this.state.definition} addWord={addWord}/>
+                            </View> : null}
                         { this.state.definition ? null : <CardList navigation={this.props.navigation}/>}    
                     </View>
 
