@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StatusBar, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, StatusBar, Animated, Easing, StyleSheet, ImageBackground } from 'react-native';
 
 class Splash extends Component {
     state = {  }
+    componentWillMount() {
+        this.opacity = new Animated.Value(0);
+      }
+    componentDidMount() {
+        Animated.timing(this.opacity, {
+            toValue: 1,
+            duration: 1000,
+            easing: Easing.ease,
+          }).start();        
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -11,17 +21,20 @@ class Splash extends Component {
                         backgroundColor="transparent"
                         barStyle="light-content"
                     />
+
+                    <Animated.View style={{opacity: this.opacity}}>
                     <Text style={styles.brand}>
                             Prospective English
                     </Text>
                     <TouchableOpacity 
-                        style={styles.btn}
-                        onPress={() => this.props.navigation.navigate('Home')}>
-                        <Text style={styles.text}>
-                            Enter as a visitor
-                        </Text>
-                    </TouchableOpacity >
-                </ImageBackground>
+                            style={styles.btn}
+                            onPress={() => this.props.navigation.navigate('Home')}>
+                            <Text style={styles.text}>
+                                Enter as a visitor
+                            </Text>
+                    </TouchableOpacity>
+                    </Animated.View>
+                    </ImageBackground>
             </View>            
         );
     }

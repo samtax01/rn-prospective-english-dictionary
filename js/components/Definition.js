@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Button, ScrollView } from 'react-native';
+import { View, StyleSheet, Animated, Easing, Button, ScrollView } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
 
 class Definition extends Component {
-    state = {  }
+    state = { saved: false }
+    componentWillMount() {
+        this.opacity = new Animated.Value(0);
+      }
+    componentDidMount() {
+        Animated.timing(this.opacity, {
+            toValue: 1,
+            duration: 400,
+            easing: Easing.ease,
+          }).start();        
+    }
     componentDidCatch(error, info) {
         // Display fallback UI
         // this.setState({ hasError: true });
@@ -43,26 +53,37 @@ class Definition extends Component {
             )
         })
     }
-
+    onAddWord= () => {
+        this.props.addWord(this.props.definition)
+        this.setState({saved: !this.state.saved})
+    }
     renderDefinition = () => {
         id = this.props.definition.id;
         entries = this.props.definition.lexicalEntries; //loop through
 
         return (
             <ScrollView style={styles.innerContainer}>
+                {this.props.closeModal ? 
                 <Icon
                     type='font-awesome'
                     iconStyle={{alignSelf: 'flex-end'}}
                     onPress={this.props.closeModal}
-                    name='close' />
+                    name='close' /> : null }
                 <View style={styles.header}>
                     <Text h1>{id}</Text>
+                {this.state.saved ?
                     <Icon
                         type='font-awesome'
                         iconStyle={{}}
-                        onPress={()=>{this.props.addWord(this.props.definition)}}
+                        onPress={this.onAddWord}
                         color= '#E91E63'
-                        name='heart' />
+                        name='heart' /> :
+                    <Icon
+                        type='font-awesome'
+                        iconStyle={{}}
+                        onPress={this.onAddWord}
+                        color= '#E91E63'
+                        name='heart-o' />}
                 </View>
                 {this.renderEntries(entries)}
             </ScrollView>
@@ -70,9 +91,11 @@ class Definition extends Component {
     }
     render() {
         return (
-        <View style={styles.container}>
-            { this.props.definition ? this.renderDefinition() : null}
-        </View>
+        <Animated.View style={{opacity: this.opacity}}>
+            <View style={styles.container}>
+                { this.props.definition ? this.renderDefinition() : null}
+            </View>
+        </Animated.View>
         );
     }
 }
@@ -80,9 +103,9 @@ class Definition extends Component {
 const styles = StyleSheet.create({
     container: {
         borderRadius: 5,
-        width: 300,
-        height: 500,
-        backgroundColor: 'white'
+        width: 320,
+        height: 550,
+        backgroundColor: 'white',
     },
     innerContainer: {
         padding: 20,

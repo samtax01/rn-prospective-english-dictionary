@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, StatusBar, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet,StatusBar, ImageBackground } from 'react-native';
 import { Button } from 'react-native-elements';
 import { fetchWords } from '../api/firebase';
+
+import SearchBox from '../components/SearchBox';
 import WordList from '../components/WordList';
 
 class Notebook extends Component {
-    state = { words: null }
+    state = { words: null,  }
+
     async componentDidMount() {
         const words = await fetchWords()
         this.setState({
             words: words
         })
+  
     }
     render() {
         return (
@@ -20,7 +24,11 @@ class Notebook extends Component {
                     backgroundColor="transparent"
                     barStyle="light-content"
                     />
+                    <View style={styles.innerContainer}>
+                        <SearchBox search={this.onSearchWord}/>
+                    </View>
                     <WordList words={this.state.words}/>
+                    
             </ImageBackground>
 
             </View>            
@@ -31,6 +39,9 @@ class Notebook extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    innerContainer: {
+        paddingTop: 20
     },
     background: {
         width: '100%',
