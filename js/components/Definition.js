@@ -3,7 +3,7 @@ import { View, StyleSheet, Animated, Easing, Button, ScrollView } from 'react-na
 import { Text, Icon } from 'react-native-elements';
 
 class Definition extends Component {
-    state = { saved: false }
+    state = { saved: this.props.saved }
     componentWillMount() {
         this.opacity = new Animated.Value(0);
       }

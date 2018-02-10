@@ -9,11 +9,12 @@ import Definition from '../components/Definition';
 import CardList from '../components/CardList';
 
 class Home extends Component {
-    state = { word: 'word', definition: '' }
+    state = { word: '', definition: '', saved: false }
     onSearchWord = async (word) => {
         const data = await searchWord(word)
         const definition = data[0]
-        this.setState({word, definition})
+        const saved = false
+        this.setState({word, definition, saved})
     }
 
     render() {
@@ -29,7 +30,7 @@ class Home extends Component {
                         <SearchBox search={this.onSearchWord}/>
                         { this.state.definition ? 
                             <View style={styles.modalContainer}>
-                                <Definition definition={this.state.definition} addWord={addWord}/>
+                                <Definition definition={this.state.definition} addWord={addWord} saved={this.state.saved}/>
                             </View> : null}
                         { this.state.definition ? null : <CardList navigation={this.props.navigation}/>}    
                     </View>
