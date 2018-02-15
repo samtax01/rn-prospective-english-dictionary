@@ -8,4 +8,4 @@
 
 <h1>Definition</h1>
 
-![Definition](preview/2.png)
+![Definition](preview/3.png)
