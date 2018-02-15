@@ -6,7 +6,7 @@ class Navigator extends Component {
     //take current screen as props from parent
     onNav = (screen) => {
         if (this.props.current !== screen) {
-            this.props.navigation.navigate(screen)
+            this.props.navigation.navigate(screen, {words: this.props.words})
         }
     }
     render() {

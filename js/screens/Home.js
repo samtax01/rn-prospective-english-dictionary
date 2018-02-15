@@ -8,6 +8,7 @@ import { fetchWords } from '../api/firebase';
 import SearchBox from '../components/SearchBox';
 import Definition from '../components/Definition';
 import CardList from '../components/CardList';
+import Navigator from '../components/Navigator';
 
 class Home extends Component {
     state = { word: '', words: '', definition: '', saved: false }
@@ -42,6 +43,9 @@ class Home extends Component {
                                 <Definition definition={this.state.definition} addWord={addWord} saved={this.state.saved}/>
                             </View> : null}
                         { this.state.definition ? null : <ScrollView><CardList navigation={this.props.navigation} words={this.state.words}/></ScrollView>}    
+                        <View style={styles.tabContainer}>
+                            <Navigator navigation={this.props.navigation} words={this.state.words} current='Home'/>
+                        </View>
                     </View>
 
                 </ImageBackground>
@@ -69,4 +73,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
 
     },
+    tabContainer: {
+        flex: 1,
+        paddingBottom: 15
+    }
 })
