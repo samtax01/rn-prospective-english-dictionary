@@ -13,13 +13,15 @@ import Navigator from '../components/Navigator';
 class Home extends Component {
     state = { word: '', words: '', definition: '', saved: false }
 
-    async componentDidMount() {
+     componentDidMount() {
+         this.onFetch()
+    }
+    onFetch = async () => {
         const words = await fetchWords()
         this.setState({
             words: words
         })
     }
-
     onSearchWord = async (word) => {
         const data = await searchWord(word)
         const definition = data[0]
@@ -43,12 +45,13 @@ class Home extends Component {
                         <SearchBox search={this.onSearchWord} onClear={this.onClear}/>
                         { this.state.definition ? 
                             <View style={styles.modalContainer}>
-                                <Definition definition={this.state.definition} addWord={addWord} saved={this.state.saved}/>
+                                <Definition definition={this.state.definition} addWord={addWord} saved={this.state.saved} onFetch={this.onFetch}/>
                             </View> : null}
                         { this.state.definition ? null : <ScrollView><CardList navigation={this.props.navigation} words={this.state.words}/></ScrollView>}    
+                        { this.state.definition ? null : 
                         <View style={styles.tabContainer}>
                             <Navigator navigation={this.props.navigation} words={this.state.words} current='Home'/>
-                        </View>
+                        </View>}
                     </View>
 
                 </ImageBackground>

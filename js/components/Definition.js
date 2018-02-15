@@ -55,6 +55,7 @@ class Definition extends Component {
     }
     onAddWord= () => {
         this.props.addWord(this.props.definition)
+        if(this.props.onFetch){this.props.onFetch()}
         this.setState({saved: !this.state.saved})
     }
     renderDefinition = () => {

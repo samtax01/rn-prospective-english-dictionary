@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet,StatusBar, ImageBackground } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
-// import { fetchWords } from '../api/firebase';
+import { fetchWords } from '../api/firebase';
 import { searchWord } from '../api/oxford';
 import { addWord } from '../api/firebase';
 
@@ -12,7 +12,6 @@ import Navigator from '../components/Navigator';
 
 class Notebook extends Component {
     state = { word: '', words: this.props.navigation.state.params.words, visible: false, definition: '', saved: true }
-
 
     closeModal = () => {
         this.setState({visible:false});

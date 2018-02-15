@@ -1,5 +1,15 @@
 {
   "expo": {
-    "sdkVersion": "23.0.0"
+   "name": "Prospective Dictionary",
+   "icon": "./res/logo.jpg",
+   "version": "1.0.0",
+   "slug": "Dictionary",
+   "sdkVersion": "23.0.0",
+   "ios": {
+     "bundleIdentifier": "com.zianzhang.dictionary"
+   },
+   "android": {
+     "package": "com.zianzhang.dictionary"
+   }
   }
 }
