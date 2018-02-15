@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import { searchWord } from '../api/oxford';
 import { addWord } from '../api/firebase';
@@ -41,7 +41,7 @@ class Home extends Component {
                             <View style={styles.modalContainer}>
                                 <Definition definition={this.state.definition} addWord={addWord} saved={this.state.saved}/>
                             </View> : null}
-                        { this.state.definition ? null : <CardList navigation={this.props.navigation} words={this.state.words}/>}    
+                        { this.state.definition ? null : <ScrollView><CardList navigation={this.props.navigation} words={this.state.words}/></ScrollView>}    
                     </View>
 
                 </ImageBackground>
