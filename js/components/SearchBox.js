@@ -10,6 +10,12 @@ class SearchBox extends Component {
             word: text,
         })
     }
+    clearText = () => {
+        this.props.onClear();
+        this.setState({
+            word: '',
+        }) 
+    }
     render() {
         return (
             <View>
@@ -18,6 +24,8 @@ class SearchBox extends Component {
                     inputStyle={{backgroundColor: 'white', }}
                     lightTheme 
                     round
+                    clearIcon
+                    onClearText={this.clearText}
                     onChangeText={text => this.changeText(text)}
                     onSubmitEditing={() => this.props.search(this.state.word)}
                     icon={{type: 'font-awesome', name: 'search'}}

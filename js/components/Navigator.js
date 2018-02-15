@@ -30,6 +30,15 @@ class Navigator extends Component {
                     name='book'
                     onPress={() => {this.onNav('Notebook')}}
                      />
+                <Icon
+                    raised
+                    size='32'
+                    type='MaterialCommunityIcons'
+                    iconStyle={{}}
+                    color= '#EF5350'
+                    name='note'
+                    onPress={() => {this.onNav('Flashcard')}}
+                     />                     
             </View>
         )
     }

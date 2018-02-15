@@ -26,6 +26,9 @@ class Home extends Component {
         const saved = false
         this.setState({word, definition, saved})
     }
+    onClear = () => {
+        this.setState({definition: ''})
+    }
 
     render() {
         return (
@@ -37,7 +40,7 @@ class Home extends Component {
                         barStyle="light-content"
                     />
                     <View style={styles.innerContainer}>
-                        <SearchBox search={this.onSearchWord}/>
+                        <SearchBox search={this.onSearchWord} onClear={this.onClear}/>
                         { this.state.definition ? 
                             <View style={styles.modalContainer}>
                                 <Definition definition={this.state.definition} addWord={addWord} saved={this.state.saved}/>

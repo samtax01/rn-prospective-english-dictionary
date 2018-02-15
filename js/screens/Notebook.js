@@ -43,7 +43,7 @@ class Notebook extends Component {
                     </View>
 
                     <View style={styles.tabContainer}>
-                        <Navigator navigation={this.props.navigation} current='Notebook'/>
+                        <Navigator navigation={this.props.navigation} words={this.state.words} current='Notebook'/>
                     </View>
                     {this.state.visible ? 
                         <View style={styles.modalContainer}>
