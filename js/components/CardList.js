@@ -5,11 +5,11 @@ import { Card, ListItem, Button } from 'react-native-elements'
 const screens = [
     {
         name: 'Notebook',
-        // avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
+        image: require('../../res/notebook.jpg')
      },
      {
         name: 'Flashcard',
-        // avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
+        image: require('../../res/card.jpg')
      },
    ]
    
@@ -18,22 +18,21 @@ class CardList extends Component {
 
     render() {
         return (
-            <Card containerStyle={{borderRadius: 5, borderColor: 'transparent', backgroundColor: 'transparent', }} >
+            <View containerStyle={{ height: 600, borderRadius: 5, borderColor: 'transparent', backgroundColor: 'transparent', }} >
             {
               screens.map((u, i) => {
                 return (
                   <TouchableOpacity key={u.name} onPress={() => {this.props.navigation.navigate(u.name, {words: this.props.words})}}>
-                  <ListItem
-                    containerStyle={{height: 150, marginBottom: 50, borderRadius: 5, backgroundColor: 'white'}} 
-                    // roundAvatar
+                  <Card
+                    containerStyle={{height: 201, marginBottom: 50, borderRadius: 5, backgroundColor: 'white'}} 
                     title={u.name}
-                    // avatar={{uri:u.avatar}}
+                    image={u.image}
                   />
                   </TouchableOpacity>
                 );
               })
             }
-          </Card>
+          </View>
         );
     }
 }
